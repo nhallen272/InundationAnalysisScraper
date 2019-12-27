@@ -4,6 +4,7 @@ This program scrapes data the NOAA Inundation Analysis web application. It uses 
 
 Installation
 1. Install python library dependencies: pip install -r requirements.txt
+   Or just pip install selenium. This was written with version 3.141.0
 
 2. Requires Google Chrome and appropriate version of Chromedriver.
    https://chromedriver.chromium.org/
@@ -12,6 +13,8 @@ Installation
     https://selenium.dev/documentation/en/webdriver/driver_requirements/#adding-executables-to-your-path
 
 --TODO--
+- Add exception handling.
 - Needs a better way to manage the returned data.
 - Run selenium in the background. 
 - Work on text displayed in terminal while loading the web pages( create a working loading bar...)
+
