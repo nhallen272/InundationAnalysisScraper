@@ -109,13 +109,10 @@ class InundationAnalysis(webdriver.Chrome):
     def get_data(self):
         return self.data
 
-#class InundationData(): TODO
-  #  """Command line user interface to handle inundation data."""
-  #     
-  #  def __init__(self, data):
- #       for i in range(len(data)):
-  #          data[i]    
-    #def 
+#TODO
+#class InundationData(): 
+  #  """Command line user interface to handle returned data."""
+  
         
     
 
@@ -207,7 +204,8 @@ def main():
     # write data to a txt file
     
     with open("inundation_data.txt", 'w') as datfile:
-        datfile.write("period_start\t period_end\t time_high_tide\t elevation_above_datum\t tide_type\t duration\n")
+        datfile.write("period_start\t period_end\t time_high_tide\t elevation_above_datum\t tide_type\t duration")
+        datfile.write("\n")
         for dataset in data:
             datfile.write(json.dumps(dataset))
             datfile.write('\n')
