@@ -1,10 +1,10 @@
-"# InundationAnalysisScraper"
+"#! InundationAnalysisScraper"
 
 This program scrapes data the NOAA Inundation Analysis web application. It uses selenium to automate the inputs, then saves the data in a dictionary. It writes the data to a text file when finished. Written in python 3.7.4
 
 Installation
 1. Install python library dependencies: pip install -r requirements.txt
-   Or just pip install selenium. This was written with version 3.141.0
+   Or just pip install selenium. This was written with selenium version 3.141.0
 
 2. Requires Google Chrome and appropriate version of Chromedriver.
    https://chromedriver.chromium.org/
