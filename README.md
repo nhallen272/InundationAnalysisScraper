@@ -1,6 +1,6 @@
 "# InundationAnalysisScraper"
 
-This program scrapes data the NOAA Inundation Analysis web application. It uses selenium to automate the inputs, then saves the data in a dictionary. It writes the data to a text file when finished.
+This program scrapes data the NOAA Inundation Analysis web application. It uses selenium to automate the inputs, then saves the data in a dictionary. It writes the data to a text file when finished. Written in python 3.7.4
 
 Installation
 1. Install python library dependencies: pip install -r requirements.txt
