@@ -78,7 +78,7 @@ class InundationAnalysis(webdriver.Chrome):
             if isYear:
                 for i in range(4):
                     binput.send_keys(Keys.BACK_SPACE)
-                    binput.send_keys(input_value)
+                    
                     
             else:
                 binput.send_keys(input_value)
