@@ -53,14 +53,14 @@ class InundationAnalysis(webdriver.Chrome):
     def input_dropdown_date(self, css_selector, mdy):
         try:
             input_element = self.find_element_by_css_selector(css_selector)
-
-        except:
-            print("Error")   
-        finally:
             options = input_element.find_elements_by_tag_name("option")
             for option in options:
                 if option.get_attribute("value") == self.query.dates[mdy]:
                     option.click()
+        except:
+            print("Error")   
+        
+            
     
     def box_input(self, css_selector, input_value):
         if input_value == 'beginYear' or input_value == 'endYear':
@@ -73,15 +73,15 @@ class InundationAnalysis(webdriver.Chrome):
 
         try:
             binput = self.find_element_by_css_selector(css_selector)
-        finally:
             binput.click()
             if isYear:
                 for i in range(4):
                     binput.send_keys(Keys.BACK_SPACE)
-                    
-                    
+                   
             else:
                 binput.send_keys(input_value)
+        except:
+            print("Error with html box-input")
             
 
     def submit(self, css_selector):
@@ -108,12 +108,6 @@ class InundationAnalysis(webdriver.Chrome):
     
     def get_data(self):
         return self.data
-
-#TODO
-#class InundationData(): 
-  #  """Command line user interface to handle returned data."""
-  
-        
     
 
 
@@ -201,16 +195,16 @@ def main():
 
         maindriver.close()
 
-    # write data to a txt file
+        # write data to a txt file
     
-    with open("inundation_data.txt", 'w') as datfile:
-        datfile.write("period_start\t period_end\t time_high_tide\t elevation_above_datum\t tide_type\t duration")
-        datfile.write("\n")
-        for dataset in data:
-            datfile.write(json.dumps(dataset))
-            datfile.write('\n')
+        with open("inundation_data.txt", 'w') as datfile:
+            datfile.write("period_start\t period_end\t time_high_tide\t elevation_above_datum\t tide_type\t duration")
+            datfile.write("\n")
+            for dataset in data:
+                datfile.write(json.dumps(dataset))
+                datfile.write('\n')
 
-        datfile.close()
+            datfile.close()
 
 main()
     
