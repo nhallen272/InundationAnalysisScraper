@@ -205,42 +205,42 @@ def main():
         # -----startup selenium webdriver-----
         maindriver = InundationAnalysis(base_url)
 
-        try:
-            maindriver.wait_page('#paramform > table.table > tbody > tr:nth-child(9) > td > input[type=text]', "Loading page", "Success")
+        # wait for page to load
+        maindriver.wait_page('#paramform > table.table > tbody > tr:nth-child(9) > td > input[type=text]', "Loading page", "Success")
+    
+    
+        # get name of station      
+        station_name = get_s_name(station_id, maindriver)
+        print("Inputting html-forms for {0}...".format(station_name))
+        # -----find and input the elevation, dates----- 
+        maindriver.box_input('#paramform > table.table > tbody > tr:nth-child(9) > td > input[type=text]', maindriver.query.get_elevation())
+        # begin-date input 
+        maindriver.input_dropdown_date('#beginDate_Month_ID', 'beginMonth')      
+        maindriver.input_dropdown_date('#beginDate_Day_ID', 'beginDay')  
+        maindriver.box_input('#beginDate_Year_ID', 'beginYear')
         
-        finally:
-            # get name of station      
-            station_name = get_s_name(station_id, maindriver)
-            print("Inputting html-forms for {0}...".format(station_name))
-            # -----find and input the elevation, dates----- 
-            maindriver.box_input('#paramform > table.table > tbody > tr:nth-child(9) > td > input[type=text]', maindriver.query.get_elevation())
-            # begin-date input 
-            maindriver.input_dropdown_date('#beginDate_Month_ID', 'beginMonth')      
-            maindriver.input_dropdown_date('#beginDate_Day_ID', 'beginDay')  
-            maindriver.box_input('#beginDate_Year_ID', 'beginYear')
-            
-            # end-date input
-            maindriver.input_dropdown_date('#endDate_Month_ID', 'endMonth')
-            maindriver.input_dropdown_date('#endDate_Day_ID', 'endDay')
-            maindriver.box_input('#endDate_Year_ID', 'endYear')
-            
-            # submit the form
-            print("Submitting...")
-            maindriver.submit('#paramform > input[type=submit]:nth-child(31)')
+        # end-date input
+        maindriver.input_dropdown_date('#endDate_Month_ID', 'endMonth')
+        maindriver.input_dropdown_date('#endDate_Day_ID', 'endDay')
+        maindriver.box_input('#endDate_Year_ID', 'endYear')
+        
+        # submit the form
+        print("Submitting...")
+        maindriver.submit('#paramform > input[type=submit]:nth-child(31)')
             
 
-        try:
-            maindriver.wait_page('body > div.container-fluid.custom-padding > div > div > div.span9 > table > tbody > tr:nth-child(11) > td > table > tbody', "Loading Results", "Page Loaded")
-            # check if forms are correct.
-            if maindriver.check_errors('#paramform > span'):
-                continue # to top of loop     
-        finally:
-            # save the table into memory as a lsit of dicts
-            # check if there are 'gaps' in data, if so, advance the tr:nth-child from 11-12
-            maindriver.get_table_data('body > div.container-fluid.custom-padding > div > div > div.span9 > table > tbody > tr:nth-child(11) > td > table > tbody', 'tr')
-            data = maindriver.get_data()
-            maindriver.close()
-            save_data(data, station_name, maindriver.query.raw_startdate, maindriver.query.raw_enddate)
+        # wait for page to load
+        maindriver.wait_page('body > div.container-fluid.custom-padding > div > div > div.span9 > table > tbody > tr:nth-child(11) > td > table > tbody', "Loading Results", "Page Loaded")
+        # check if forms are correct.
+        if maindriver.check_errors('#paramform > span'):
+            continue # to top of loop     
+    
+        # save the table into memory as a lsit of dicts
+        # check if there are 'gaps' in data, if so, advance the tr:nth-child from 11-12
+        maindriver.get_table_data('body > div.container-fluid.custom-padding > div > div > div.span9 > table > tbody > tr:nth-child(11) > td > table > tbody', 'tr')
+        data = maindriver.get_data()
+        maindriver.close()
+        save_data(data, station_name, maindriver.query.raw_startdate, maindriver.query.raw_enddate)
         
         
 main()
