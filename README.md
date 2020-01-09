@@ -15,7 +15,7 @@ Installation
     https://selenium.dev/documentation/en/webdriver/driver_requirements/#adding-executables-to-your-path
 
 --TODO--
-- Add exception handling.
-- Needs a better way to manage the returned data.
+- Find all possible errors that the webpage can raise and make exceptions in each case.
+- Probably won't work on "Historical Stations"
 - Run selenium in the background. 
 
