@@ -183,7 +183,7 @@ def save_data(data, station_name, startdate, enddate):
 
     # save as a python-shelve object.
     try:
-        with shelve.open(fname) as db:
+        with shelve.open("Inundation_python") as db:
             cnt = 0
             for dataset in data:
                 db['data{0}'.format(cnt)] = dataset
