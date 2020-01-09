@@ -8,6 +8,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
 import time
 import json
+import sys
 import shelve
 from collections import Counter
 import os
@@ -153,6 +154,12 @@ def get_s_name(station_id, maindriver):
 
     return name.strip()
 
+def verify_version():
+    print(sys.version_info[0:3])
+    if sys.version_info[0] < 3 and sys.version_info[1] < 7:
+        print("Must use at least python 3.x")
+        sys.exit()
+
 def save_data(data, station_name, startdate, enddate):
     savdir = input("Data will be saved at {0} Change?(y/n)".format(os.getcwd()))
     if savdir.lower() == 'y':
@@ -199,6 +206,7 @@ def main():
     # -----Main program-----
     # ex. wrightsville beach station id = 8658163
     while True:
+        verify_version()
         station_id = input("Enter station ID: ")
         base_url = "https://tidesandcurrents.noaa.gov/inundation/AnalysisParams?id={0}".format(station_id)
         
@@ -242,5 +250,6 @@ def main():
         maindriver.close()
         save_data(data, station_name, maindriver.query.raw_startdate, maindriver.query.raw_enddate)
         
-        
-main()
+
+if __name__ == "__main__":
+    main()
