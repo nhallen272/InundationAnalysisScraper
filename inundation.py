@@ -168,7 +168,7 @@ def save_data(data, station_name, startdate, enddate):
     name = station_name.split(',')
     startdate = "{0}-{1}-{2}".format(s_yr, s_mon, s_d)
     enddate = "{0}-{1}-{2}".format(e_yr, e_mon, e_d)
-    fname = "{0} Inundation Data{1} - {2}".format(name, startdate, enddate)
+    fname = "{0} Inundation Data {1} - {2}".format(name, startdate, enddate)
     # write to txt file
     try:
         with open(fname + ".txt", 'w') as datfile:
