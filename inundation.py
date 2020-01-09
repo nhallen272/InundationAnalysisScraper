@@ -155,9 +155,9 @@ def get_s_name(station_id, maindriver):
     return name.strip()
 
 def verify_version():
-    print(sys.version_info[0:3])
+    
     if sys.version_info[0] < 3 and sys.version_info[1] < 7:
-        print("Must use at least python 3.x")
+        print("Must use at least python 3.7.x")
         sys.exit()
 
 def save_data(data, station_name, startdate, enddate):
