@@ -10,7 +10,6 @@ import time
 import json
 import sys
 import shelve
-from collections import Counter
 import os
 
 class InundationQuery:
