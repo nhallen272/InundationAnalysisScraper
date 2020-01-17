@@ -166,14 +166,8 @@ def verify_version():
         sys.exit()
 
 def save_data(data, station_name, startdate, enddate):
-    savdir = input("Data will be saved at {0} Change?(y/n)".format(os.getcwd()))
-    if savdir.lower() == 'y':
-        savdir = input("Enter a directory to save data: ")
-        if os.path.exists(savdir):
-            os.chdir(savdir)
-        else:
-            os.mkdir(savdir)
-            os.chdir(savdir)
+    savdir = os.getcwd()
+    print("Data will be saved at {0}".format(savdir))
     # format a filename with start/end dates and sation name
     s_mon, s_d, s_yr = startdate
     e_mon, e_d, e_yr = enddate
@@ -213,6 +207,7 @@ def save_data(data, station_name, startdate, enddate):
             f.write("{0}".format(dataset[key]).center(col_widths[key] + 2))
         f.write('\n')
     f.close()
+    print("Saved as txt file.")
 
     # save as a reloadable shelve object. (persistent object)
     try:
@@ -224,7 +219,7 @@ def save_data(data, station_name, startdate, enddate):
         db.close()
         print("Saved as a python shelve file.")
     except:
-        print("Error saving as persistent object.")
+        print("Error saving as python shelve object.")
     
         
 
