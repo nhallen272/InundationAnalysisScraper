@@ -236,12 +236,17 @@ def main():
 
         # wait for page to load
         maindriver.wait_page('#paramform > input[type=submit]:nth-child(38)', "Loading page", "Success")
-    
-    
+
         # get name of station      
         station_name = get_s_name(station_id, maindriver)
         print("Inputting html-forms for {0}...".format(station_name))
         # -----find and input the elevation, dates----- 
+        # click the user-specified elevation
+        try:
+            elevation_radio_button = maindriver.find_element_by_css_selector('#paramform > table.table > tbody > tr:nth-child(10) > td > input[type=radio]:nth-child(1)')
+            elevation_radio_button.click()
+        except:
+            pass
         maindriver.box_input('#paramform > table.table > tbody > tr:nth-child(10) > td > input[type=text]:nth-child(2)', maindriver.query.get_elevation())
         # begin-date input  
         maindriver.input_dropdown_date('#beginDate_Month_ID', 'beginMonth')      
@@ -255,6 +260,7 @@ def main():
         
         # submit the form
         print("Submitting...")
+
         maindriver.submit('#paramform > input[type=submit]:nth-child(38)')
         # check if forms are correct.
         if maindriver.check_errors('#paramform > span'):
